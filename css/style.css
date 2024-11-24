@@ -1,33 +1,21 @@
 /* General Reset */
+Share
+
+
+You said:
 * {
   margin: 0;
   padding: 0;
 }
+
 *,
 *::before,
 *::after {
   box-sizing: inherit;
 }
 
-/* Base Styling */
 html {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 2rem 0.5rem;
-  font-family: "Raleway", Sans-serif;
-  color: #32325d;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-@media (min-width: 40rem) {
-  body {
-    padding: 2rem;
-  }
 }
 
 a {
@@ -35,13 +23,22 @@ a {
   color: black;
 }
 
-a:hover {
-  color: red;
-  text-decoration: underline;
+body {
+  padding: 2rem 0.5rem;
+  font-family: "Raleway", Sans-serif;
+  color: #32325d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+@media (min-width: 40rem) {
+  body {
+    padding: 2rem;
+  }
 }
 
-/* Containers */
-#container, #container3 {
+#container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,54 +51,59 @@ a:hover {
   flex-direction: column;
 }
 
-/* Title */
+#container3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .title {
   text-align: center;
   margin-top: 50px;
 }
-
 .title__blog {
   font-size: 80px;
 }
-
 .title ul {
   display: flex;
   margin-top: 10px;
   list-style-type: none;
 }
-
 .title ul li {
   font-size: 20px;
   margin: 0 auto;
 }
+.title ul li a:hover {
+  color: red;
+  text-decoration: underline;
+}
 
-/* Main Content and Cards */
 .main .container {
   display: flex;
+  -webkit-display: box;
+  -moz-display: box;
+  -ms-display: flexbox;
+  -webkit-display: flex;
   flex-wrap: wrap;
   padding: 0;
   margin: 0;
 }
-
 .main .cards {
   display: flex;
   padding: 1rem;
   margin-top: 1rem;
   width: 100%;
 }
-
 @media (min-width: 40rem) {
   .main .cards {
     width: 50%;
   }
 }
-
 @media (min-width: 56rem) {
   .main .cards {
     width: 33.3%;
   }
 }
-
 .main .cards .card-item {
   display: flex;
   flex-direction: column;
@@ -111,93 +113,98 @@ a:hover {
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   transition: transform 0.5s;
+  -webkit-transition: transform 0.5s;
 }
-
 .main .cards .card-item:hover {
   cursor: pointer;
   transform: scale(1.1);
+  -webkit-transform: scale(1.1);
 }
-
-.main .cards .card-image {
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 6px 6px 0 0;
-  opacity: 0.91;
+.main .cards .card-item:hover .card-image {
+  opacity: 1;
 }
-
 .main .cards .card-info {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   padding: 1rem;
   line-height: 1.5em;
 }
-
 .main .cards .card-title {
   font-size: 25px;
   line-height: 1.1em;
   color: #32325d;
   margin-bottom: 0.2em;
 }
-
+.main .cards .head {
+  font-size: 14px;
+  margin-left: 10px;
+}
+.main .cards .card-image {
+  height: 200px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 6px 6px 0px 0px;
+  opacity: 0.91;
+}
+.main .cards .art {
+  width: 100%;
+}
 .main .cards a:hover {
   color: red;
   text-transform: uppercase;
 }
 
-/* Content */
 .content {
   margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .content__main {
   width: 900px;
   border: 1px solid gray;
 }
-
-@media (max-width: 800px) {
+@media only screen and (max-width: 800px) {
   .content__main {
     width: 600px;
   }
 }
-
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   .content__main {
     width: 350px;
   }
 }
-
 .content__main .title {
   margin-top: 10px;
   font-size: 24px;
   text-decoration: underline;
 }
-
 .content__main .author {
   text-align: center;
   font-size: 12px;
   margin-top: 10px;
 }
-
+.content__main__story {
+  width: 600px;
+  border: 1px solid gray;
+}
 .content__main .paragraph {
   text-align: justify;
   padding: 10px;
   text-indent: 10px;
 }
-
 .content__main .options {
   text-align: center;
 }
-
 .content__main .options .btn {
   background-color: black;
   border: none;
   color: white;
   padding: 5px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 16px;
-  cursor: pointer;
-}
