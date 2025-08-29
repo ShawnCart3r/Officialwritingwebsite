@@ -1,20 +1,37 @@
-#container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-#container2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-
-    
+#container,
+#container3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#container3{
-    display: flex;
-    justify-content: center;
-    align-items: center; 
+
+
+/* (Optional) keep the inner grid nicely centered & constrained */
+.container2 .main .container {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+}
+html, body {
+  height: 100%;
+}
+
+/* Only on pages that contain #container2 */
+body:has(#container2) {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr; /* header (#container) + main (#container2) */
+}
+
+/* Center the content of the second section */
+#container2 {
+  display: grid;
+  place-items: center;   /* centers both horizontally & vertically */
+  padding: 2rem;         /* optional breathing room */
+}
+
+/* Optional: constrain the inner grid width */
+#container2 .main .container {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
 }

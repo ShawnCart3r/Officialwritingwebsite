@@ -1,181 +1,395 @@
-//title
-.title{
-  text-align: center;
-  margin-top: 50px;
+/* =========================================
+   THEME + BASE + LAYOUT + CARDS + UTILITIES
+   Complete, drop-in stylesheet
+========================================= */
 
-  &__blog{
-    font-size: 80px;
-  }
-
-
-  
-
-  ul{
-    display: flex;
-    margin-top: 10px;
-    list-style-type: none;
-    li{
-      font-size: 20px ;
-      margin: 0 auto;
-      
-      a:hover{
-        color: red;
-        text-decoration: underline;
-      }
-    }
-    
-   
-  }
-}
-//main section
-.main{
-  .container {
-    display: flex;
-    -webkit-display: box;
-    -moz-display: box;
-    -ms-display: flexbox;
-    -webkit-display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
-  }
-  
-  // Cards
-  .cards {
-    display: flex;
-    padding: 1rem;
-    margin-top: 1rem;
-    width: 100%;
-    @media(min-width: 40rem) {
-      width: 50%;
-    }
-    @media(min-width: 56rem) {
-      width: 33.3%;
-    }
-  
-    .card-item {
-      display: flex;
-      flex-direction: column;
-      background-color: #fff;
-      width: 100%;
-      border-radius: 6px;
-      box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-      overflow: hidden;
-      transition: transform 0.5s;
-      -webkit-transition: transform 0.5s;
-  
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-        -webkit-transform: scale(1.1);
-        .card-image {
-          opacity: 1;
-        }
-      }
-    }
-  
-    // Content
-    .card-info {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      padding: 1rem;
-      line-height: 1.5em;
-    }
-  
-    .card-title {
-      font-size: 25px;
-      line-height: 1.1em;
-      color: #32325d;
-      margin-bottom: 0.2em;
-    }
-    .head{
-      font-size: 14px;
-      margin-left: 10px;
-    }
-  
-    // Images
-    .card-image{
-      height: 200px;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: 6px 6px 0px 0px;
-      opacity: 0.91;
-    }
-    .art{
-      width: 100%;
-    }
-    a:hover{
-      color: red;
-      text-transform: uppercase;
-    }
-  }
-  
-  
- 
+/* ========== Theme Tokens ==========
+   Tune these to quickly reskin the site
+==================================== */
+:root {
+  --bg: #0f1115;
+  --card: #11141a;
+  --card-ink: #e8ecf1;
+  --ink: #dfe6ee;
+  --muted: #9aa8bb;
+  --primary: #6ea8fe;
+  --accent: #ff5470;
+  --ring: rgba(110, 168, 254, 0.45);
+  --shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 45px -12px rgba(0, 0, 0, 0.55);
+  --radius: 14px;
+  --space: clamp(0.75rem, 1.2vw, 1.1rem);
 }
 
-//writing
-.content{
-  margin-top: 50px; 
+/* ========== Reset / Base ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: radial-gradient(1200px 700px at 70% -20%, #1a2130 0%, #0f1115 55%) no-repeat var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .18s ease;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--ring);
+  border-radius: 10px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========== Utilities ========== */
+.container {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+}
+
+/* Centering helpers for legacy containers (if needed) */
+#container,
+#container2,
+#container3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+}
 
-  
- 
-  &__main{
-    width: 900px;
-    border: 1px solid gray;
+/* Page-scoped layout: only pages that include #container2 get vertical centering */
+body:has(#container2) {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr; /* header (#container) + main (#container2) */
+}
 
-    @media only screen  and(max-width: 800px)  {
-      width: 600px;
-    }
+/* Make #container2 fill remaining space and center its content */
+#container2 {
+  display: grid;
+  place-items: center;
+  padding: 2rem 0; /* breathing room */
+}
 
-    @media only screen  and(max-width: 600px)  {
-      width: 350px;
-    }
-  .title{
-    margin-top: 10px;
-    font-size: 24px;
-    text-decoration: underline;
-  }
-  .author{
-    text-align: center;
-    font-size: 12px;
-    margin-top: 10px;
-  }
-  
-  &__story{
-    width: 600px;
-    border: 1px solid gray;
-   
-  }
-  .paragraph{
-    text-align: justify;
-    padding: 10px;
-    text-indent: 10px;
+@media (min-width: 40rem) {
+  #container { padding-inline: 2rem; }
+}
 
-  }
-.options{
+/* ========== Title / Header ========== */
+.title {
   text-align: center;
-  .btn{
-    background-color: black; //
-  border: none;
-  color: white;
-  padding: 5px 12px;
-  text-align: center;
+  margin-top: clamp(28px, 6vw, 60px);
+}
+.title__blog {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #fff, #b7c4d8 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.title ul {
+  display: flex;
+  gap: clamp(10px, 2vw, 24px);
+  justify-content: center;
+  margin-top: 12px;
+  list-style: none;
+  padding: 0;
+}
+.title ul li {
+  font-size: clamp(14px, 1.5vw, 18px);
+  color: var(--muted);
+}
+.title ul li a {
+  padding: 6px 10px;
+  border-radius: 10px;
+  position: relative;
+}
+.title ul li a:hover { color: var(--accent); }
+.title ul li a::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .22s ease;
+  border-radius: 2px;
+}
+.title ul li a:hover::after { transform: scaleX(1); }
+
+/* ========== Main / Cards Grid ========== */
+.main {
+  padding-block: clamp(16px, 3vw, 28px);
+}
+.main .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  padding: 0;
+  margin: 0;
+}
+
+/* Each grid item wrapper */
+.cards { padding: 0; }
+
+.cards .card-item {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--card) 0%, #0d1016 100%);
+  color: var(--card-ink);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  will-change: transform;
+}
+.cards .card-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.cards .card-item:hover .card-image::after { opacity: 0.10; }
+
+/* ===== Card Media: unified, flexible, no-crop by default ===== */
+.cards .card-image {
+  position: relative;
+  aspect-ratio: 16 / 9;     /* consistent heights across cards */
+  overflow: hidden;
+  background: #000;         /* subtle letterbox when using contain */
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+.cards .card-image img,
+.cards .card-image .art {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;       /* NO crop by default */
+  object-position: center;
+  transition: transform .45s ease, opacity .35s ease;
+}
+
+/* gloss overlay for pop */
+.cards .card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(100% 60% at 80% -10%, rgba(255,255,255,.25) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(17,20,26,.65) 100%);
+  opacity: .18;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+
+/* Optional: only zoom images in COVER mode (see utilities below) */
+@media (hover: hover) and (pointer: fine) {
+  .cards .card-item:hover .card-image--cover img,
+  .cards .card-item:hover .img-cover {
+    transform: scale(1.06);
+  }
+}
+
+/* ========== Card Content ========== */
+.cards .card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(14px, 2vw, 18px);
+  line-height: 1.55;
+}
+
+.cards .card-title {
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.15;
+  color: #ebf2ff;
+  margin: 0;
+}
+.cards .card-title a:hover {
+  color: var(--primary);
+  text-transform: none;
+}
+.cards .head {
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: 2px;
+}
+.cards .meta {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Subtle CTA link in cards */
+.card-link {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.card-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+  color: var(--primary);
+}
+
+/* ========== Writing / Article View ========== */
+.content {
+  margin-top: clamp(26px, 4vw, 44px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-inline: 12px;
+}
+.content__main {
+  width: min(900px, 100%);
+  background: linear-gradient(180deg, #0f131a 0%, #0b0e14 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: clamp(14px, 3vw, 28px);
+}
+@media only screen and (max-width: 800px) {
+  .content__main { width: min(700px, 100%); }
+}
+@media only screen and (max-width: 600px) {
+  .content__main { width: 100%; padding: 16px; }
+}
+
+.content .title {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: clamp(22px, 3.2vw, 30px);
+  font-weight: 800;
+  line-height: 1.15;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  letter-spacing: -0.01em;
+  background: linear-gradient(180deg, #fff, #cbd7ea 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.content .author {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+.content__main__story {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.02);
+  overflow: hidden;
+}
+.content .paragraph {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  padding: clamp(10px, 2.5vw, 16px);
+  text-indent: 0;
+  color: var(--ink);
+}
+.content .paragraph p + p { margin-top: .85em; }
+
+.options {
+  text-align: center;
+  margin-top: 12px;
+}
+.options .btn {
+  appearance: none;
+  background: linear-gradient(180deg, var(--primary), #4b78e6);
+  border: 0;
+  color: white;
+  padding: 10px 16px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: 0 8px 20px -8px rgba(110,168,254,.6);
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+.options .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px -10px rgba(110,168,254,.55);
+  filter: saturate(1.1);
+}
+.options .btn:active { transform: translateY(0); }
+
+/* ========== Nice-to-have extras ========== */
+/* subtle card tilt on hover for pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .main .cards .card-item:hover {
+    transform: translateY(-6px) perspective(900px) rotateX(1.2deg);
   }
 }
-  
-  
-  
-  }
- 
+
+/* ===== Optional Media Modes & Utilities ===== */
+/* Full-bleed (may crop) — opt-in per card */
+.card-image--cover img,
+.card-image--cover .art,
+.img-cover {
+  object-fit: cover;
 }
+
+/* Focal helpers for cover mode */
+.focal-top       { object-position: 50% 10%; }
+.focal-bottom    { object-position: 50% 90%; }
+.focal-left      { object-position: 10% 50%; }
+.focal-right     { object-position: 90% 50%; }
+.focal-top-left  { object-position: 10% 10%; }
+.focal-top-right { object-position: 90% 10%; }
+.focal-bot-left  { object-position: 10% 90%; }
+.focal-bot-right { object-position: 90% 90%; }
+.focal-center    { object-position: 50% 50%; }
+
+/* Force no-crop on a single image even inside cover mode */
+.img-contain { object-fit: contain !important; }
+
+/* Aspect ratio helpers (use on .card-image) */
+.ar-1x1  { aspect-ratio: 1 / 1; }
+.ar-4x3  { aspect-ratio: 4 / 3; }
+.ar-3x4  { aspect-ratio: 3 / 4; }
+.ar-21x9 { aspect-ratio: 21 / 9; }
